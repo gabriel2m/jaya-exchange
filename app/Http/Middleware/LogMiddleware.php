@@ -18,7 +18,7 @@ class LogMiddleware
     {
         $response = $next($request);
 
-        Log::info("\nRequest:\n{$request}Response:\n$response");
+        Log::info("\nRequest:\n$request\nResponse:\n$response");
 
         return $response;
     }
