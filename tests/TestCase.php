@@ -16,17 +16,17 @@ abstract class TestCase extends BaseTestCase
 
     protected function mockExchangeRatesApiLatestRates()
     {
-        $mock = mock(ExchangeRatesApiService::class)
-            ->makePartial()
-            ->shouldAllowMockingProtectedMethods()
-            ->allows([
-                'latestRates' => [
-                    'USD' => 1.071593,
-                    'BRL' => 5.841356,
-                ],
-            ]);
-
-        $this->instance(ExchangeService::class, $mock);
-        $this->instance(ExchangeRatesApiService::class, $mock);
+        $this->instance(
+            ExchangeService::class,
+            mock(ExchangeRatesApiService::class)
+                ->makePartial()
+                ->shouldAllowMockingProtectedMethods()
+                ->allows([
+                    'latestRates' => [
+                        'USD' => 1.071593,
+                        'BRL' => 5.841356,
+                    ],
+                ])
+        );
     }
 }
