@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Contracts\Services\ExchangeService;
+use App\Services\ExchangeRatesApiService;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -11,7 +13,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        app()->bind(ExchangeService::class, ExchangeRatesApiService::class);
     }
 
     /**
