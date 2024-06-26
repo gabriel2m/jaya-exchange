@@ -18,6 +18,8 @@ class User extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['id'];
+
     public function transactions(): HasMany
     {
         return $this->hasMany(Transaction::class)->orderBy('id');
