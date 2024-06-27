@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Unit\Api\Transactions;
+namespace Tests\Feature\Api\Transactions;
 
 use App\Http\Resources\TransactionResource;
 use App\Models\Transaction;

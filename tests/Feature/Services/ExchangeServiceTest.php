@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Unit\Services;
+namespace Tests\Feature\Services;
 
 use App\Contracts\Services\ExchangeService;
 use Tests\TestCase;
