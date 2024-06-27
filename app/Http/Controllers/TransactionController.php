@@ -5,12 +5,23 @@ namespace App\Http\Controllers;
 use App\Contracts\Services\TransactionService;
 use App\Http\Requests\StoreTransactionRequest;
 use App\Http\Resources\TransactionResource;
+use App\Models\User;
 use Illuminate\Http\Client\HttpClientException;
 use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpFoundation\Response;
 
 class TransactionController extends Controller
 {
+    /**
+     * Paginated list of $user transactions
+     */
+    public function index(User $user)
+    {
+        return TransactionResource::collection(
+            $user->transactions()->simplePaginate()
+        );
+    }
+
     /**
      * Store a newly created resource in storage
      */
