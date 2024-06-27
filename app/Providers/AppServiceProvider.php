@@ -10,13 +10,17 @@ use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
+    public $bindings = [
+        ExchangeService::class => ExchangeRatesApiService::class,
+        TransactionServiceContract::class => TransactionService::class,
+    ];
+
     /**
      * Register any application services.
      */
     public function register(): void
     {
-        app()->bind(ExchangeService::class, ExchangeRatesApiService::class);
-        app()->bind(TransactionServiceContract::class, TransactionService::class);
+        //
     }
 
     /**
