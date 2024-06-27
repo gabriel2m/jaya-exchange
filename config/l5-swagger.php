@@ -5,14 +5,14 @@ return [
     'documentations' => [
         'default' => [
             'api' => [
-                'title' => 'L5 Swagger UI',
+                'title' => 'Jaya Exchange',
             ],
 
             'routes' => [
                 /*
                  * Route for accessing api documentation interface
                 */
-                'api' => 'api/documentation',
+                'api' => '',
             ],
             'paths' => [
                 /*
@@ -39,7 +39,7 @@ return [
                  * Absolute paths to directory containing the swagger annotations are stored.
                 */
                 'annotations' => [
-                    base_path('app'),
+                    base_path('docs'),
                 ],
 
             ],
@@ -220,7 +220,7 @@ return [
          * Set this to `true` in development mode so that docs would be regenerated on each request
          * Set this to `false` to disable swagger generation on production
         */
-        'generate_always' => env('L5_SWAGGER_GENERATE_ALWAYS', false),
+        'generate_always' => env('L5_SWAGGER_GENERATE_ALWAYS', env('APP_ENV') == 'local'),
 
         /*
          * Set this to `true` to generate a copy of documentation in yaml format
@@ -263,7 +263,7 @@ return [
                  * 'full' (expands the tags and operations),
                  * 'none' (expands nothing).
                  */
-                'doc_expansion' => env('L5_SWAGGER_UI_DOC_EXPANSION', 'none'),
+                'doc_expansion' => env('L5_SWAGGER_UI_DOC_EXPANSION', 'list'),
 
                 /**
                  * If set, enables filtering. The top bar will show an edit box that
