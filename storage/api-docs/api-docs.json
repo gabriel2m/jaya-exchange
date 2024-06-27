@@ -1,0 +1,264 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Jaya Exchange",
+        "description": "Exchange Rates Rest API",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/transactions": {
+            "post": {
+                "tags": [
+                    "transactions"
+                ],
+                "description": "Create a transaction",
+                "operationId": "893105192b55854235195a549788cbd3",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/StoreTransactionRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Transaction created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TransactionResource"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Invalid data",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "The selected from is invalid. (and 1 more error)"
+                                        },
+                                        "errors": {
+                                            "properties": {
+                                                "": {
+                                                    "description": "attibute name",
+                                                    "type": "array",
+                                                    "items": {
+                                                        "description": "error message",
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            },
+                                            "type": "object",
+                                            "example": {
+                                                "from": [
+                                                    "The selected from is invalid."
+                                                ],
+                                                "to": [
+                                                    "The selected to is invalid."
+                                                ]
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "503": {
+                        "description": "External service error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "default": "Something wrong with our external services, contact a admin"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/transactions/{user_id}": {
+            "get": {
+                "tags": [
+                    "transactions"
+                ],
+                "description": "User transactions paginated list",
+                "operationId": "097476dc9ff4e7da9c751232d351c0f6",
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/TransactionResource"
+                                            }
+                                        },
+                                        "links": {
+                                            "properties": {
+                                                "first": {
+                                                    "type": "string",
+                                                    "example": "https://host-url/transactions/1?page=1"
+                                                },
+                                                "last": {
+                                                    "type": "string",
+                                                    "example": "https://host-url/transactions/1?page=2"
+                                                },
+                                                "prev": {
+                                                    "type": "string",
+                                                    "example": null
+                                                },
+                                                "next": {
+                                                    "type": "string",
+                                                    "example": "https://host-url/transactions/1?page=2"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "meta": {
+                                            "properties": {
+                                                "current_page": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "from": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "path": {
+                                                    "type": "string",
+                                                    "example": "https://host-url/transactions/1"
+                                                },
+                                                "per_page": {
+                                                    "type": "integer",
+                                                    "example": 15
+                                                },
+                                                "to": {
+                                                    "type": "integer",
+                                                    "example": 15
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "User not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "default": "User not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "TransactionResource": {
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "user_id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "from": {
+                        "type": "string",
+                        "example": "BRL"
+                    },
+                    "amount": {
+                        "type": "number",
+                        "example": 12.55
+                    },
+                    "to": {
+                        "type": "string",
+                        "example": "USD"
+                    },
+                    "result": {
+                        "type": "number",
+                        "example": 231.54877318093025
+                    },
+                    "rate": {
+                        "type": "number",
+                        "example": 18.4501014486797
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "example": "2024-06-27T17:19:28.000000Z"
+                    }
+                },
+                "type": "object"
+            },
+            "StoreTransactionRequest": {
+                "required": [
+                    "user_id",
+                    "from",
+                    "amount",
+                    "to"
+                ],
+                "properties": {
+                    "user_id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "from": {
+                        "type": "string",
+                        "example": "BRL"
+                    },
+                    "amount": {
+                        "type": "number",
+                        "example": 12.55
+                    },
+                    "to": {
+                        "type": "string",
+                        "example": "USD"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    }
+}
