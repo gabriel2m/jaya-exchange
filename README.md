@@ -19,7 +19,7 @@
 * [Technologies](#technologies)
   
 ## Getting Started
-The Jaya Exchange it's a Currency Exchange Rates Rest API wrote using PHP and the Laravel framework.
+**Jaya Exchange** it's a currency exchange rates Rest API wrote using PHP and the Laravel framework.
 
 To access real-time exchange rates we use the [Exchange Rates Api](https://exchangeratesapi.io/) and we support **all** currencies supported by then.
 
@@ -27,7 +27,7 @@ To access real-time exchange rates we use the [Exchange Rates Api](https://excha
 Our API counts with the following endpoints:
 
 - \[POST\] **/transactions** - Create a transaction
-- \[​GET\] **/payments/{user_id}** - User transactions paginated list
+- \[​GET\] **/transactions/{user_id}** - User transactions paginated list
 
 Default base url: [http://localhost](http://localhost)
 
