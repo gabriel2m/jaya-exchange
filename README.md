@@ -1,66 +1,111 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
-
 <p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="https://jaya.tech/images/logo-white.png" />
+      <source media="(prefers-color-scheme: light)" srcset="https://jaya.tech/images/logo-black.png" />
+      <img alt="logo" src="https://jaya.tech/images/logo-black.png" />
+    </picture>
 </p>
 
-## About Laravel
+## Table of contents
+* [Getting Started](#getting-started)
+  * [API](#api)
+      * [Swagger](#swagger)
+          * [api-docs.json](#api-docsjson)
+          * [Swagger UI](#swagger-ui)
+  * [CLI](#cli)
+* [Install](#install)
+  * [Config](#config)
+* [Test](#test)
+* [Technologies](#technologies)
+  
+## Getting Started
+The Jaya Exchange it's a Currency Exchange Rates Rest API wrote using PHP and the Laravel framework.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+To access real-time exchange rates we use the [Exchange Rates Api](https://exchangeratesapi.io/) and we support **all** currencies supported by then.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### API
+Our API counts with the following endpoints:
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- \[POST\] **/transactions** - Create a transaction
+- \[​GET\] **/payments/{user_id}** - User transactions paginated list
 
-## Learning Laravel
+Default base url: [http://localhost](http://localhost)
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+For simplicity there's no endpoint to manipulate users, when creating a transaction the user is also created case not found.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+Thanks to database limitations the maximum digits limit used it's 13, any digits beyond are rounded using the [half to even rule](https://www.php.net/manual/en/function.round.php)
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+The API full documentation it's available via [Swagger](https://swagger.io/) as shown below.
 
-## Laravel Sponsors
+#### Swagger
+The API documentation it's delivered using [Swagger](https://swagger.io/) and you have two ways to access it:
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+##### api-docs.json
+The json file with the OpenAPI specification: [api-docs.json](https://raw.githubusercontent.com/gabriel2m/jaya-credit-card-payment/master/storage/api-docs/api-docs.json)
 
-### Premium Partners
+##### Swagger UI
+The [Swagger UI](https://swagger.io/tools/swagger-ui/) web interface that allows to visualize and interact with the API’s resources who the default url is: [http://localhost](http://localhost)
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+### CLI
+For the docker environment and cli commands we use [Sail](https://laravel.com/docs/11.x/sail). 
 
-## Contributing
+To see the commands list run:
+```sh
+./vendor/bin/sail
+```
+In case you want to configure a shell alias:
+```sh
+alias sail='sh $([ -f sail ] && echo sail || echo vendor/bin/sail)'
+```
+Start application command:
+```sh
+./vendor/bin/sail up -d
+```
+For more details access the sail [documentation](https://laravel.com/docs/11.x/sail).
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## Install
+To install this application first you have to have installed **[docker](https://docs.docker.com/engine/install)** and **[docker compose](https://docs.docker.com/compose/install)**.
 
-## Code of Conduct
+Then once on the application folder you have two options:
+1. Run the install script, but for that first you have to have installed **[make](https://www.gnu.org/software/make/)**, then just run: 
+```sh
+make install
+```
+2. Run the script lines by yourself:
+```sh
+docker run --rm --interactive --tty --volume .:/app --user $(id -u):$(id -g) composer install
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+cp .env.example .env
 
-## Security Vulnerabilities
+./vendor/bin/sail up -d
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+./vendor/bin/sail npm install
 
-## License
+./vendor/bin/sail artisan key:generate
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+./vendor/bin/sail artisan migrate
+```
+
+Once installed you can access all the applications links listed on the sections above.
+
+### Config
+After install you can set your [Exchange Rates Api](https://exchangeratesapi.io/) access key by editing the config **EXCHANGE_RATES_API_ACCESS_KEY** on the .env file but thats not mandatory.
+
+You can also edit the others configs on the .env file and config folder if you want. To see more about you can access the Laravel [documentation](https://laravel.com/docs/11.x/configuration).
+
+## Test
+Command to run the application tests:
+```sh
+./vendor/bin/sail artisan test
+```
+
+## Technologies
+- Language: **[PHP 8.3](https://www.php.net)**
+- Framework: **[Laravel 11](https://laravel.com)**
+- Database: **[PostgreSQL](https://www.postgresql.org)**
+- Api Documentation: **[OpenAPI](https://www.openapis.org/)**
+- Git Hooks: **[Husky](https://typicode.github.io/husky)**
+- Linter: **[Laravel Pint](https://laravel.com/docs/11.x/pint)**
+- Containerization: **[Docker](https://www.docker.com)**
+- Tests: **[PHPUnit](https://phpunit.de/index.html)**
+- And more...
