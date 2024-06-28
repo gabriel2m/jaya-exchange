@@ -20,7 +20,7 @@
 * [Technologies](#technologies)
   
 ## Getting Started
-**Jaya Exchange** it's a currency exchange rates Rest API wrote using PHP and the Laravel framework.
+**Jaya Exchange** it's a currency exchange rates Rest API wrote using [PHP](https://www.php.net) and the [Laravel framework](https://laravel.com).
 
 To access real-time exchange rates we use the [Exchange Rates Api](https://exchangeratesapi.io/) and we support **all** currencies supported by then.
 
@@ -46,7 +46,7 @@ The API full documentation it's available via [Swagger](https://swagger.io/) as 
 The API documentation it's delivered using [Swagger](https://swagger.io/) and you have two ways to access it:
 
 ##### api-docs.json
-The json file with the OpenAPI specification: [api-docs.json](https://raw.githubusercontent.com/gabriel2m/jaya-credit-card-payment/master/storage/api-docs/api-docs.json)
+The json file with the OpenAPI specification: [api-docs.json](https://raw.githubusercontent.com/gabriel2m/jaya-exchange/master/storage/api-docs/api-docs.json)
 
 ##### Swagger UI
 The [Swagger UI](https://swagger.io/tools/swagger-ui/) web interface that allows to visualize and interact with the API’s resources who the default url is: [http://localhost](http://localhost)
