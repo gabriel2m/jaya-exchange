@@ -28,6 +28,8 @@ The code is divided in model, view, control and service layers.
 
 The transactions resource is the main and only one available via api. For simplicity there's no endpoint to manipulate users, when creating a transaction the user is also created case not found.
 
+For audit purpose all requests and responses are log.
+
 Thanks to database limitations the maximum digits limit used on the application numbers it's 13, any digits beyond are rounded using the [half to even rule](https://www.php.net/manual/en/function.round.php).
 
 ### API
