@@ -5,9 +5,26 @@ namespace App\Services;
 use App\Contracts\Services\ExchangeService;
 use Illuminate\Http\Client\RequestException;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Stringable;
 
 class ExchangeRatesApiService implements ExchangeService
 {
+    private Stringable $baseUrl;
+
+    private string $accessKey;
+
+    private string $baseCurrency;
+
+    /**
+     * @param  array{base_url: string, access_key: string, base_currency: string}  $config
+     */
+    public function __construct(array $config)
+    {
+        $this->baseUrl = str($config['base_url'])->finish('/');
+        $this->accessKey = $config['access_key'];
+        $this->baseCurrency = $config['base_currency'];
+    }
+
     public function allowedCurrencies(): array
     {
         return [
@@ -201,9 +218,9 @@ class ExchangeRatesApiService implements ExchangeService
      */
     protected function latestRates(string ...$currencies): array
     {
-        $response = Http::get(str(config('exchange.exchange_rates_api.base_url'))->finish('/')->append('latest'), [
-            'access_key' => config('exchange.exchange_rates_api.access_key'),
-            'base' => config('exchange.exchange_rates_api.base_currency'),
+        $response = Http::get($this->baseUrl->append('latest'), [
+            'access_key' => $this->accessKey,
+            'base' => $this->baseCurrency,
             'symbols' => implode(',', $currencies) ?: null,
         ]);
 

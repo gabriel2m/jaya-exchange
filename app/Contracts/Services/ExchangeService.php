@@ -4,6 +4,8 @@ namespace App\Contracts\Services;
 
 interface ExchangeService
 {
+    public function __construct(array $config);
+
     /**
      * List of supported currency codes
      *
