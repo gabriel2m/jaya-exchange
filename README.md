@@ -24,6 +24,12 @@
 
 To access real-time exchange rates we use the [Exchange Rates Api](https://exchangeratesapi.io/) and we support **all** currencies supported by then.
 
+The code is divided in model, view, control and service layers. 
+
+The transactions resource is the main and only one available via api. For simplicity there's no endpoint to manipulate users, when creating a transaction the user is also created case not found.
+
+Thanks to database limitations the maximum digits limit used on the application numbers it's 13, any digits beyond are rounded using the [half to even rule](https://www.php.net/manual/en/function.round.php).
+
 ### API
 Our API counts with the following endpoints:
 
@@ -31,10 +37,6 @@ Our API counts with the following endpoints:
 - \[​GET\] **/transactions/{user_id}** - User transactions paginated list
 
 Default base url: [http://localhost](http://localhost)
-
-For simplicity there's no endpoint to manipulate users, when creating a transaction the user is also created case not found.
-
-Thanks to database limitations the maximum digits limit used it's 13, any digits beyond are rounded using the [half to even rule](https://www.php.net/manual/en/function.round.php)
 
 The API full documentation it's available via [Swagger](https://swagger.io/) as shown below.
 
