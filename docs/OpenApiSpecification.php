@@ -78,10 +78,10 @@ use Symfony\Component\HttpFoundation\Response;
     schema: 'StoreTransactionRequest',
     required: ['user_id', 'from', 'amount', 'to'],
     properties: [
-        new OA\Property(property: 'user_id', type: 'integer', example: 1),
-        new OA\Property(property: 'from', type: 'string', example: 'BRL'),
-        new OA\Property(property: 'amount', type: 'number', example: 12.55),
-        new OA\Property(property: 'to', type: 'string', example: 'USD'),
+        new OA\Property(property: 'user_id', description: 'id of the user this transaction belongs', type: 'integer', example: 1),
+        new OA\Property(property: 'from', description: 'three letter currency code', type: 'string', example: 'BRL'),
+        new OA\Property(property: 'amount', description: 'monetary amount', type: 'number', example: 12.55),
+        new OA\Property(property: 'to', description: 'three letter currency code', type: 'string', example: 'USD'),
     ]
 )]
 class OpenApiSpecification {}

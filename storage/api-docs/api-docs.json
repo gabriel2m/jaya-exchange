@@ -241,18 +241,22 @@
                 ],
                 "properties": {
                     "user_id": {
+                        "description": "id of the user this transaction belongs",
                         "type": "integer",
                         "example": 1
                     },
                     "from": {
+                        "description": "three letter currency code",
                         "type": "string",
                         "example": "BRL"
                     },
                     "amount": {
+                        "description": "monetary amount",
                         "type": "number",
                         "example": 12.55
                     },
                     "to": {
+                        "description": "three letter currency code",
                         "type": "string",
                         "example": "USD"
                     }
