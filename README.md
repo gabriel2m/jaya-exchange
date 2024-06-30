@@ -30,7 +30,7 @@ The transactions resource is the main and only one available via api. For simpli
 
 For audit purpose all requests and responses are log.
 
-Thanks to database limitations the maximum digits limit used on the application numbers it's 13, any digits beyond are rounded using the [half to even rule](https://www.php.net/manual/en/function.round.php).
+Thanks to database limitations the maximum decimal digits limit used on the application numbers it's 13, any digits beyond are rounded using the [half to even rule](https://www.php.net/manual/en/function.round.php).
 
 ### API
 Our API counts with the following endpoints:
