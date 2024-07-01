@@ -45,7 +45,7 @@ class Transaction extends Model
     protected function result(): Attribute
     {
         return Attribute::make(
-            get: fn () => $this->amount * $this->rate,
+            get: fn () => round($this->amount * $this->rate, 13, PHP_ROUND_HALF_EVEN),
         );
     }
 }

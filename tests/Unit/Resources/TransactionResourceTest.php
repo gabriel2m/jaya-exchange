@@ -27,7 +27,7 @@ class TransactionResourceTest extends TestCase
                 'amount' => 1.234567,
                 'to' => 'BRL',
                 'rate' => 5.456601646141238,
-                'result' => 6.73654032447165,
+                'result' => 6.7365403244716,
                 'created_at' => null,
             ],
             TransactionResource::make($transaction)->toArray(mock(Request::class))

@@ -17,6 +17,6 @@ class TransactionTest extends TestCase
             'rate' => 5.456601646141238,
         ]);
 
-        $this->assertEquals(6.73654032447165, $transaction->result);
+        $this->assertEquals(6.7365403244716, $transaction->result);
     }
 }
