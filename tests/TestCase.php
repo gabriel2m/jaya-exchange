@@ -2,8 +2,11 @@
 
 namespace Tests;
 
+use App\Services\ExchangeRatesApi\LatestRatesRequest;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
-use Illuminate\Support\Facades\Http;
+use Saloon\Config;
+use Saloon\Http\Faking\MockResponse;
+use Saloon\Laravel\Facades\Saloon;
 
 abstract class TestCase extends BaseTestCase
 {
@@ -15,9 +18,9 @@ abstract class TestCase extends BaseTestCase
 
     protected function mockExchangeRatesApiLatestRates()
     {
-        Http::preventStrayRequests();
-        Http::fake([
-            str(config('exchange.exchanges.exchange_rates_api.base_url'))->finish('/')->append('latest*')->toString() => fn () => Http::response([
+        Config::preventStrayRequests();
+        Saloon::fake([
+            LatestRatesRequest::class => MockResponse::make(body: [
                 'success' => true,
                 'rates' => [
                     'USD' => 1.071593,

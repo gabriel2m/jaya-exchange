@@ -1,27 +1,28 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\ExchangeRatesApi;
 
 use App\Contracts\Services\ExchangeService;
-use Illuminate\Http\Client\RequestException;
-use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Stringable;
 
 class ExchangeRatesApiService implements ExchangeService
 {
-    private Stringable $baseUrl;
+    private readonly HttpConnector $httpConnector;
 
-    private string $accessKey;
-
-    private string $baseCurrency;
+    private readonly string $baseCurrency;
 
     /**
-     * @param  array{base_url: string, access_key: string, base_currency: string}  $config
+     * @param  array{
+     *      base_url: string,
+     *      access_key: string,
+     *      base_currency: string
+     * }  $config
      */
     public function __construct(array $config)
     {
-        $this->baseUrl = str($config['base_url'])->finish('/');
-        $this->accessKey = $config['access_key'];
+        $this->httpConnector = new HttpConnector(
+            $config['base_url'],
+            $config['access_key']
+        );
         $this->baseCurrency = $config['base_currency'];
     }
 
@@ -204,30 +205,8 @@ class ExchangeRatesApiService implements ExchangeService
 
     public function rate(string $from, string $to): float
     {
-        $rates = $this->latestRates($from, $to);
+        $rates = $this->httpConnector->latestRates($this->baseCurrency, [$from, $to]);
 
         return round($rates[$to] / $rates[$from], 13, PHP_ROUND_HALF_EVEN);
-    }
-
-    /**
-     * List of real-time exchange rates
-     *
-     * @return array<string, float>
-     *
-     * @throws RequestException
-     */
-    protected function latestRates(string ...$currencies): array
-    {
-        $response = Http::get($this->baseUrl->append('latest'), [
-            'access_key' => $this->accessKey,
-            'base' => $this->baseCurrency,
-            'symbols' => implode(',', $currencies) ?: null,
-        ]);
-
-        if (! $response->json('success')) {
-            throw new RequestException($response);
-        }
-
-        return $response->json('rates');
     }
 }

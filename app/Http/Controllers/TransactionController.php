@@ -6,8 +6,8 @@ use App\Contracts\Services\TransactionService;
 use App\Http\Requests\StoreTransactionRequest;
 use App\Http\Resources\TransactionResource;
 use App\Models\User;
-use Illuminate\Http\Client\HttpClientException;
 use Illuminate\Support\Facades\Log;
+use Saloon\Exceptions\SaloonException;
 use Symfony\Component\HttpFoundation\Response;
 
 class TransactionController extends Controller
@@ -34,8 +34,8 @@ class TransactionController extends Controller
                 )->resolve(),
                 Response::HTTP_CREATED
             );
-        } catch (HttpClientException $th) {
-            Log::error($th);
+        } catch (SaloonException $e) {
+            Log::error($e);
 
             return response([
                 'message' => 'Something wrong with our external services, contact a admin',

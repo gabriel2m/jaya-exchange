@@ -6,12 +6,12 @@ use App\Contracts\Services\ExchangeService;
 use App\Http\Resources\TransactionResource;
 use App\Models\Transaction;
 use App\Models\User;
-use App\Services\ExchangeRatesApiService;
+use App\Services\ExchangeRatesApi\ExchangeRatesApiService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Http\Client\HttpClientException;
 use Mockery;
 use Mockery\MockInterface;
 use PHPUnit\Framework\Attributes\DataProvider;
+use Saloon\Exceptions\SaloonException;
 use Tests\TestCase;
 
 class StoreTest extends TestCase
@@ -100,9 +100,8 @@ class StoreTest extends TestCase
             Mockery::mock(ExchangeRatesApiService::class, function (MockInterface $mock) {
                 $mock
                     ->makePartial()
-                    ->shouldAllowMockingProtectedMethods()
-                    ->shouldReceive('latestRates')
-                    ->andThrow(HttpClientException::class);
+                    ->shouldReceive('rate')
+                    ->andThrow(SaloonException::class);
             })
         );
 

@@ -3,7 +3,7 @@
 namespace App\Providers;
 
 use App\Contracts\Services\ExchangeService;
-use App\Services\ExchangeRatesApiService;
+use App\Services\ExchangeRatesApi\ExchangeRatesApiService;
 use Illuminate\Contracts\Support\DeferrableProvider;
 use Illuminate\Support\ServiceProvider;
 
